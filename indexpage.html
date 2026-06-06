@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cosmic Vision Gallery</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= RESET ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    background:
+    radial-gradient(circle at top,#091540,#000814 60%);
+
+    color:white;
+
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background-size:400% 400%;
+
+    animation:bgmove 15s ease infinite;
+    
+
+}
+
+
+/* ================= STARS ================= */
+
+.stars{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    z-index:-5;
+
+}
+
+.stars span{
+
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:white;
+
+    border-radius:50%;
+
+    animation:twinkle 4s linear infinite;
+
+}
+
+@keyframes twinkle{
+
+    0%{
+        opacity:0.2;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(2);
+    }
+
+    100%{
+        opacity:0.2;
+        transform:scale(1);
+    }
+
+}
+
+/* ================= GLOW ================= */
+
+.glow1{
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    background:#00ffff22;
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    top:-150px;
+    left:-150px;
+
+    z-index:-4;
+
+}
+
+.glow2{
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    background:#8a2be222;
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    bottom:-150px;
+    right:-150px;
+
+    z-index:-4;
+
+}
+
+/* ================= TITLE ================= */
+
+.title{
+
+    position:absolute;
+
+    top:20px;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:4rem;
+
+    font-weight:700;
+
+    letter-spacing:5px;
+
+    background:
+    linear-gradient(to right,#00ffff,#8a2be2,#ffffff);
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    animation:glow 3s infinite alternate;
+
+}
+
+@keyframes glow{
+
+    from{
+
+        text-shadow:
+        0 0 20px #00ffff66;
+
+    }
+
+    to{
+
+        text-shadow:
+        0 0 40px #00ffff,
+        0 0 80px #8a2be2;
+
+    }
+
+}
+
+/* ================= GALLERY ================= */
+
+.gallery{
+
+    position:relative;
+
+    width:85%;
+
+    max-width:1300px;
+
+    height:650px;
+
+    margin:auto;
+
+    margin-top:110px;
+
+    overflow:hidden;
+
+    border-radius:35px;
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+    0 0 40px #00ffff33;
+
+}
+
+/* ================= SLIDER ================= */
+
+.slider{
+
+    display:flex;
+
+    height:100%;
+
+    transition:1s ease;
+
+}
+
+/* ================= SLIDE ================= */
+
+.slide{
+
+    min-width:100%;
+    height:100%;
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+}
+
+.slide img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:1.2s;
+
+}
+
+/* ================= HOVER ================= */
+
+.slide:hover img{
+
+    transform:scale(1.08);
+
+    filter:
+    brightness(1.1)
+    contrast(1.1);
+
+}
+
+/* ================= OVERLAY ================= */
+
+.overlay{
+
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+    to top,
+    rgba(0,0,0,0.96),
+    transparent);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+
+    padding:60px;
+
+}
+
+.overlay h2{
+
+    font-size:3.5rem;
+
+    margin-bottom:20px;
+
+    transform:translateY(60px);
+
+    opacity:0;
+
+    transition:0.8s;
+
+}
+
+.slide:hover .overlay h2{
+
+    transform:translateY(0);
+
+    opacity:1;
+
+}
+
+.overlay p{
+
+    max-width:800px;
+
+    line-height:1.9;
+
+    color:#ddd;
+
+    font-size:1.1rem;
+
+    transform:translateY(70px);
+
+    opacity:0;
+
+    transition:1s;
+
+}
+
+.slide:hover .overlay p{
+
+    transform:translateY(0);
+
+    opacity:1;
+
+}
+
+/* ================= BUTTONS ================= */
+
+.btn{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:75px;
+    height:75px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(15px);
+
+    color:white;
+
+    font-size:2rem;
+
+    cursor:pointer;
+
+    transition:0.4s;
+
+    z-index:100;
+
+}
+
+.btn:hover{
+
+    background:#00ffff;
+
+    color:black;
+
+    transform:
+    translateY(-50%)
+    scale(1.15);
+
+    box-shadow:
+    0 0 25px #00ffff;
+
+}
+
+.prev{
+
+    left:20px;
+
+}
+
+.next{
+
+    right:20px;
+
+}
+
+/* ================= DOTS ================= */
+
+.dots{
+
+    position:absolute;
+
+    bottom:25px;
+
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    gap:12px;
+
+}
+
+.dot{
+
+    width:14px;
+    height:14px;
+
+    border-radius:50%;
+
+    background:#ffffff66;
+
+    cursor:pointer;
+
+    transition:0.4s;
+
+}
+
+.dot.active{
+
+    background:#00ffff;
+
+    transform:scale(1.5);
+
+    box-shadow:
+    0 0 15px #00ffff;
+
+}
+
+/* ================= POPUP ================= */
+
+.popup{
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,0.95);
+
+    display:none;
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.popup-content{
+
+    width:95%;
+    max-width:1400px;
+
+    height:85vh;
+
+    display:flex;
+
+    background:#050816;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+    0 0 40px #00ffff55;
+
+    animation:popupShow 0.5s ease;
+
+    position:relative;
+
+}
+
+@keyframes popupShow{
+
+    from{
+
+        transform:scale(0.7);
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+        opacity:1;
+
+    }
+
+}
+
+.popup-content img{
+
+    width:55%;
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+.popup-text{
+
+    width:45%;
+
+    padding:60px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+}
+
+.popup-text h2{
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+
+    background:
+    linear-gradient(to right,#00ffff,#8a2be2);
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+.popup-text p{
+
+    color:#ddd;
+
+    line-height:1.9;
+
+    font-size:1.15rem;
+
+}
+
+.close{
+
+    position:absolute;
+
+    top:15px;
+    right:25px;
+
+    font-size:3rem;
+
+    cursor:pointer;
+
+}
+@keyframes bgmove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+    .title{
+
+        font-size:2rem;
+
+    }
+
+    .gallery{
+
+        height:500px;
+
+    }
+
+    .overlay{
+
+        padding:25px;
+
+    }
+
+    .overlay h2{
+
+        font-size:2rem;
+
+    }
+
+    .overlay p{
+
+        font-size:0.9rem;
+
+    }
+
+    .btn{
+
+        width:55px;
+        height:55px;
+
+    }
+
+    .popup-content{
+
+        flex-direction:column;
+
+        height:auto;
+
+    }
+
+    .popup-content img{
+
+        width:100%;
+        height:300px;
+
+    }
+
+    .popup-text{
+
+        width:100%;
+
+        padding:30px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+
+<h1 class="title">
+NextGen AI World Gallery
+</h1>
+
+<div class="gallery">
+
+<button class="btn prev">&#10094;</button>
+
+<div class="slider">
+
+<!-- 1 -->
+
+<div class="slide">
+<img src="images/AI Future City.jpg">
+<div class="overlay">
+<h2>AI FUTURE CITY</h2>
+<p>📍 Neo Tokyo, Japan</p>
+</div>
+</div>
+
+<!-- 2 -->
+
+<div class="slide">
+<img src="images/Cyberpunk World.jpg">
+<div class="overlay">
+<h2>Cyberpunk World</h2>
+<p>📍 Night City, USA</p>
+</div>
+</div>
+
+<!-- 3 -->
+
+<div class="slide">
+<img src="images/Future Satellite.jpg">
+<div class="overlay">
+<h2>Future Satellite</h2>
+<p>📍 Earth Orbit Station</p>
+</div>
+</div>
+
+<!-- 4 -->
+
+<div class="slide">
+<img src="images/Humanoid Robots.jpg">
+<div class="overlay">
+<h2>Humanoid Robots</h2>
+<p>📍Osaka Robotics Center, Japan</p>
+</div>
+</div>
+
+<!-- 5 -->
+
+<div class="slide">
+<img src="images/Future Technology.jpg">
+<div class="overlay">
+<h2>Future Technology</h2>
+<p>📍 Silicon Valley, USA</p>
+</div>
+</div>
+
+<!-- 6 -->
+
+<div class="slide">
+<img src="images/Smart Digital World.jpg">
+<div class="overlay">
+<h2>Smart Digital World</h2>
+<p>📍 Global Metaverse Network</p>
+</div>
+</div>
+
+<!-- 7 -->
+
+<div class="slide">
+<img src="images/Neon Cyber City.jpg">
+<div class="overlay">
+<h2>Neon Cyber City</h2>
+<p>📍 Seoul Future District, South Korea</p>
+</div>
+</div>
+
+<!-- 8 -->
+
+<div class="slide">
+<img src="images/Quantum AI System.jpg">
+<div class="overlay">
+<h2>Quantum AI System</h2>
+<p>📍 Quantum Research Lab, Switzerland</p>
+</div>
+</div>
+
+<!-- 9 -->
+
+<div class="slide">
+<img src="images/Robotic Civilization.jpg">
+<div class="overlay">
+<h2>Robotic Civilization</h2>
+<p>📍 Future Earth 2150</p>
+</div>
+</div>
+
+</div>
+
+<button class="btn next">&#10095;</button>
+
+<div class="dots"></div>
+
+</div>
+
+<!-- ================= POPUP ================= -->
+
+<div class="popup" id="popup">
+
+<div class="popup-content">
+
+<span class="close">&times;</span>
+
+<img id="popup-img">
+
+<div class="popup-text">
+
+<h2 id="popup-title"></h2>
+
+<p id="popup-desc"></p>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* ================= STARS ================= */
+
+const stars =
+document.querySelector('.stars');
+
+for(let i=0;i<120;i++){
+
+    let star =
+    document.createElement('span');
+
+    let size =
+    Math.random()*4;
+
+    star.style.width =
+    size + 'px';
+
+    star.style.height =
+    size + 'px';
+
+    star.style.left =
+    Math.random()*100 + '%';
+
+    star.style.top =
+    Math.random()*100 + '%';
+
+    star.style.animationDuration =
+    (Math.random()*5+2)+'s';
+
+    stars.appendChild(star);
+
+}
+
+/* ================= SLIDER ================= */
+
+const slider =
+document.querySelector('.slider');
+
+const slides =
+document.querySelectorAll('.slide');
+
+const next =
+document.querySelector('.next');
+
+const prev =
+document.querySelector('.prev');
+
+const dotsContainer =
+document.querySelector('.dots');
+
+let index = 0;
+
+/* CREATE DOTS */
+
+slides.forEach((_,i)=>{
+
+    const dot =
+    document.createElement('div');
+
+    dot.classList.add('dot');
+
+    if(i===0){
+
+        dot.classList.add('active');
+
+    }
+
+    dot.addEventListener('click',()=>{
+
+        index = i;
+
+        updateSlider();
+
+    });
+
+    dotsContainer.appendChild(dot);
+
+});
+
+const dots =
+document.querySelectorAll('.dot');
+
+/* UPDATE */
+
+function updateSlider(){
+
+    slider.style.transform =
+    `translateX(-${index * 100}%)`;
+
+    dots.forEach(dot =>
+    dot.classList.remove('active'));
+
+    dots[index].classList.add('active');
+
+}
+
+/* NEXT */
+
+next.addEventListener('click',()=>{
+
+    index++;
+
+    if(index >= slides.length){
+
+        index = 0;
+
+    }
+
+    updateSlider();
+
+});
+
+/* PREV */
+
+prev.addEventListener('click',()=>{
+
+    index--;
+
+    if(index < 0){
+
+        index = slides.length - 1;
+
+    }
+
+    updateSlider();
+
+});
+
+/* AUTO SLIDE */
+
+setInterval(()=>{
+
+    index++;
+
+    if(index >= slides.length){
+
+        index = 0;
+
+    }
+
+    updateSlider();
+
+},6000);
+
+/* ================= POPUP DATA ================= */
+
+const imageData = [
+
+{
+title:"AI Future City",
+desc:"📍 Neo Tokyo, Japan<br><br>An advanced smart city powered entirely by Artificial Intelligence. Autonomous vehicles, intelligent traffic systems, smart buildings, and connected digital infrastructure work together to create a seamless futuristic lifestyle."
+},
+
+{
+title:"Cyberpunk World",
+desc:"📍 Night City, USA<br><br>A futuristic world illuminated by neon lights, holographic advertisements, and advanced cybernetic technologies. Humans and machines coexist in a highly connected digital society."
+},
+
+{
+title:"Future Satellite",
+desc:"📍 Earth Orbit Station<br><br>Next-generation AI-powered satellites capable of monitoring weather patterns, global communications, navigation systems, and environmental changes with exceptional accuracy."
+},
+
+{
+title:"Humanoid Robots",
+desc:"📍 Osaka Robotics Center, Japan<br><br>Highly intelligent humanoid robots designed to assist humans in healthcare, education, research, manufacturing, and everyday activities through advanced machine learning."
+},
+
+{
+title:"Future Technology",
+desc:"📍 Silicon Valley, USA<br><br>A glimpse into tomorrow's innovations including artificial intelligence, quantum computing, smart devices, autonomous systems, and revolutionary technological advancements."
+},
+
+{
+title:"Smart Digital World",
+desc:"📍 Global Metaverse Network<br><br>A fully connected digital ecosystem where people can work, communicate, learn, and interact through immersive virtual environments powered by AI technologies."
+},
+
+{
+title:"Neon Cyber City",
+desc:"📍 Seoul Future District, South Korea<br><br>A futuristic smart city featuring holographic displays, intelligent transportation systems, autonomous services, and vibrant cyber-inspired architecture."
+},
+
+{
+title:"Quantum AI System",
+desc:"📍 Quantum Research Lab, Switzerland<br><br>An advanced computing system combining Artificial Intelligence and Quantum Computing to solve highly complex scientific, medical, and technological problems."
+},
+
+{
+title:"Robotic Civilization",
+desc:"📍 Future Earth 2150<br><br>A vision of the future where humans and intelligent robots collaborate to build sustainable cities, advanced industries, and a highly efficient global society."
+}
+
+];
+/* ================= POPUP ================= */
+
+const popup =
+document.getElementById('popup');
+
+const popupImg =
+document.getElementById('popup-img');
+
+const popupTitle =
+document.getElementById('popup-title');
+
+const popupDesc =
+document.getElementById('popup-desc');
+
+slides.forEach((slide,index)=>{
+
+    slide.addEventListener('click',()=>{
+
+        popup.style.display='flex';
+
+        popupImg.src =
+        slide.querySelector('img').src;
+
+        popupTitle.innerHTML =
+        imageData[index].title;
+
+        popupDesc.innerHTML =
+        imageData[index].desc;
+
+    });
+
+});
+
+/* CLOSE */
+
+document.querySelector('.close')
+.addEventListener('click',()=>{
+
+    popup.style.display='none';
+
+});
+
+popup.addEventListener('click',(e)=>{
+
+    if(e.target===popup){
+
+        popup.style.display='none';
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
